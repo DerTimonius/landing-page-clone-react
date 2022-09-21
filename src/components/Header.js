@@ -6,11 +6,12 @@ import community from '../images/community.svg';
 const topStyle = css`
   background: white;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
   height: 112px;
-  width: 100%;
+  width: 960px;
+  margin: 0 auto;
   h2 {
     font-size: 16px;
   }
@@ -21,21 +22,30 @@ const topStyle = css`
   a p {
     color: gray;
   }
-
-  .logo {
-    display: inline-block;
-    vertical-align: middle;
+  .logo a {
+    display: flex;
+    flex-direction: row;
   }
   .logo img {
     margin-right: 12px;
     height: 80px;
   }
+  .logo .text {
+    padding-top: 15px;
+    margin-left: -15px;
+  }
+
   .explore a {
     width: 100px;
     background-color: #333333;
     border-radius: 48px;
     padding: 12px 24px;
     color: white;
+    width: 200px;
+  }
+  .explore a img {
+    margin-left: 15px;
+    margin-top: -2px;
   }
 `;
 function Top() {
@@ -51,7 +61,7 @@ function Top() {
             </div>
           </a>
         </div>
-        <div className="explore">
+        <div className="explore btn-transform">
           <a href="#a">
             Explore <img src={arrow} alt="Arrow" />
           </a>

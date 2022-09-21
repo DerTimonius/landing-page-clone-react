@@ -14,25 +14,45 @@ const paymentOptions = {
     saving: 'Save 25% for a limited time',
   },
   yearly: {
-    price: '$99 per year',
+    price: {
+      actual: '$99 ',
+      per: ' per year',
+    },
     saving: 'Save $9/yr with yearly billing',
   },
 };
+let buttons = {
+  monthly: true,
+  yearly: false,
+};
+
+const buttonActive = css`
+  background: white;
+  font-weight: 700;
+`;
+const buttonInactive = css`
+  background: transparent;
+  font-weight: 400;
+`;
+
 const pricingStyle = css`
   background: #18a0fb;
   color: white;
   text-align: center;
   padding: 128px 0px;
-  font-size: 36px;
+  h2 {
+    font-size: 36px;
+    margin-top: -12px;
+  }
+  h2 img {
+    display: inline-block;
+    vertical-align: middle;
+  }
   h4 {
     font-weight: 700;
     font-size: 18px;
     line-height: 24px;
     color: #18a0fb;
-  }
-  .options {
-    padding: 64px;
-    list-style: none;
   }
   ul {
     list-style: none;
@@ -74,11 +94,9 @@ const pricingStyle = css`
     display: inline-block;
     padding: 4px;
     border-radius: 32px;
+    color: #333333;
   }
   .pills button {
-    color: #333333;
-    font-weight: 700;
-    box-shadow: 0px 2px 4px rgb(0 0 0 / 4%);
     padding: 4px 12px;
     border-radius: 32px;
     border: none;
@@ -109,7 +127,7 @@ const pricingStyle = css`
     text-align: center;
     border-radius: 12px;
     color: #1bc47d;
-    width: 240px;
+    width: max-content;
     font-weight: 700;
   }
   .options p {
@@ -143,6 +161,11 @@ const pricingStyle = css`
     font-weight: 600;
     font-size: 20px;
     opacity: 0.64;
+    margin-top: 48px;
+  }
+  #companies {
+    margin-top: 12px;
+    padding-bottom: -36px;
   }
 `;
 
@@ -151,6 +174,8 @@ function Pricing() {
 
   const handlePayment = (event) => {
     setPayment(paymentOptions[event.currentTarget.value]);
+    buttons = { monthly: false, yearly: false };
+    buttons[event.currentTarget.value] = true;
   };
   return (
     <div>
@@ -164,18 +189,24 @@ function Pricing() {
           <div className="personal">
             <h4>Personal</h4>
             <div className="pills">
-              <button value="monthly" onClick={handlePayment}>
+              <button
+                value="monthly"
+                onClick={handlePayment}
+                css={buttons.monthly ? buttonActive : buttonInactive}
+              >
                 Monthly
               </button>
-              <button value="yearly" onClick={handlePayment}>
+              <button
+                value="yearly"
+                onClick={handlePayment}
+                css={buttons.yearly ? buttonActive : buttonInactive}
+              >
                 Yearly
               </button>
             </div>
             <div className="price">
               <h3>
-                <span>
-                  {payment.price.not ? payment.price.not : payment.price}
-                </span>
+                <span>{payment.price.not ? payment.price.not : ''}</span>
                 <strong>{payment.price.actual}</strong>
                 {payment.price.per}
               </h3>
@@ -219,7 +250,11 @@ function Pricing() {
         </div>
         <br />
         <p>Automator is used by designer on these teams:</p>
-        <img src={companies} alt="Icons of companies using Automator" />
+        <img
+          src={companies}
+          alt="Icons of companies using Automator"
+          id="companies"
+        />
       </section>
     </div>
   );

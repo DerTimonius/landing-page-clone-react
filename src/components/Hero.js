@@ -113,6 +113,10 @@ const poweredStyles = css`
     color: rgba(0, 0, 0, 0.4);
     font-weight: 600;
   }
+  p img {
+    display: inline-block;
+    vertical-align: middle;
+  }
 `;
 function Hero() {
   return (
@@ -136,7 +140,7 @@ function Hero() {
         <div className="headline" css={heroHeadlineStyle}>
           <h2>There’s an automation for that</h2>
           <p>Automate your Figma tasks in one click.</p>
-          <a href="#4" className="btn">
+          <a href="#4" className="btn btn-transform">
             {' '}
             <img src={figma} alt="Fimga logo" /> Try it for free
           </a>

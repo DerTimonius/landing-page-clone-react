@@ -27,10 +27,6 @@ const communityStyle = css`
     color: white;
     font-weight: bold;
   }
-  a img {
-    display: inline-block;
-    vertical-align: middle;
-  }
   .cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -38,7 +34,7 @@ const communityStyle = css`
     gap: 24px;
     width: 720px;
     height: 644px;
-    margin: 64px;
+    margin: 64px auto;
     text-align: left;
     color: white;
   }
@@ -55,7 +51,6 @@ const communityStyle = css`
     width: 100%;
     padding: 32px;
     min-height: 320px;
-    /* display: flex; */
   }
   .cards .card:nth-of-type(1) {
     background: #7b61ff;
@@ -88,6 +83,9 @@ const communityStyle = css`
   }
   .card-head a {
     background: rgba(0, 0, 0, 0.15);
+    position: relative;
+    top: -15px;
+    left: 4px;
   }
 `;
 function Community() {

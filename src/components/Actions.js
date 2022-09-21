@@ -1,17 +1,35 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import compass from '../images/compass-dark.svg';
+import compassDark from '../images/compass-dark.svg';
+import compass from '../images/compass.svg';
 import cursor from '../images/cursor.svg';
 import figmaBackground from '../images/figma.svg';
-import dots from '../images/four-dots.svg';
-import glass from '../images/looking-glass.svg';
+import dots from '../images/four-dots-bright.svg';
+import dotsDark from '../images/four-dots.svg';
+import glass from '../images/looking-glass-bright.svg';
+import glassDark from '../images/looking-glass.svg';
 
 const images = {
   a: 'https://automator.design/assets/images/actions/find-layers.svg',
   b: 'https://automator.design/assets/images/actions/apply-styles.svg',
   c: 'https://automator.design/assets/images/actions/api-request.svg',
 };
+let buttons = {
+  a: true,
+  b: false,
+  c: false,
+};
+
+const buttonInactive = css`
+  background: transparent;
+  color: #333333;
+`;
+const buttonActive = css`
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+`;
+
 const actionStyle = css`
   padding-top: 128px;
   text-align: center;
@@ -36,35 +54,16 @@ const actionStyle = css`
     align-self: center;
     opacity: 0.8;
   }
-  .gifButtons {
-    display: flex;
-    justify-content: center;
-    padding: 12px 24px;
-    margin: 12px auto 64px;
-  }
-  .gifButtons button,
   .imageButtons button {
-    background: transparent;
     border-radius: 24px;
     font-size: 18px;
-    color: white;
     opacity: 0.8;
     font-family: inherit;
     font-weight: 700;
     border: none;
     margin: 0 25px;
-    &:active {
-      background-color: white;
-      color: black;
-    }
-  }
-  .gif {
-    width: 720px;
-    height: 480px;
-    border-radius: 40px;
-  }
-  .imageButtons button {
-    color: black;
+    height: 48px;
+    width: 220px;
   }
   .overlay {
     text-align: center;
@@ -80,8 +79,8 @@ const actionStyle = css`
   }
   #foreground {
     position: absolute;
-    top: -20;
     z-index: 2;
+    margin: -20px 0 0 150px;
     border-radius: 16px;
     border: 0.5px solid rgba(0, 0, 0, 0.4);
     box-shadow: 0px 4px 8px rgb(0 0 0 / 24%), 0px 24px 40px rgb(0 0 0 / 24%);
@@ -93,6 +92,8 @@ function Actions() {
 
   const handleClickImage = (event) => {
     setImageShown(images[event.currentTarget.value]);
+    buttons = { a: false, b: false, c: false };
+    buttons[event.currentTarget.value] = true;
   };
   return (
     <div>
@@ -115,15 +116,28 @@ function Actions() {
             Plugin API at your fingertips.
           </p>
           <ul className="imageButtons">
-            <button value="a" onClick={handleClickImage}>
-              <img src={glass} alt="Pen icon" /> Find layers
+            <button
+              value="a"
+              onClick={handleClickImage}
+              css={buttons.a ? buttonActive : buttonInactive}
+            >
+              <img src={buttons.a ? glass : glassDark} alt="Pen icon" /> Find
+              layers
             </button>
-            <button value="b" onClick={handleClickImage}>
-              <img src={dots} alt="Airdrop icon" />
+            <button
+              value="b"
+              onClick={handleClickImage}
+              css={buttons.b ? buttonActive : buttonInactive}
+            >
+              <img src={buttons.b ? dots : dotsDark} alt="Airdrop icon" />
               Apply styles
             </button>
-            <button value="c" onClick={handleClickImage}>
-              <img src={compass} alt="compass icon" />
+            <button
+              value="c"
+              onClick={handleClickImage}
+              css={buttons.c ? buttonActive : buttonInactive}
+            >
+              <img src={buttons.c ? compass : compassDark} alt="compass icon" />
               API requests
             </button>
             <br />

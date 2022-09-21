@@ -1,6 +1,6 @@
 import Actions from './components/Actions';
 import Community from './components/Community';
-import Footer from './components/Footer';
+import Bottom from './components/Footer';
 import Top from './components/Header';
 import Hero from './components/Hero';
 import Pricing from './components/Pricing';
@@ -15,7 +15,7 @@ function App() {
       <Actions />
       <Community />
       <Pricing />
-      <Footer />
+      <Bottom />
     </div>
   );
 }
